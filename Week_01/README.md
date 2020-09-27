@@ -98,3 +98,29 @@ type LinkedListNode struct {
 - 访问元素： $O(n)$
 - 添加元素： $O(1)$
 - 删除元素： $O(logn)$
+
+#### Java 优先队列源码
+
+优先队列，底层使用的一个基于数据实现的堆，通过调用`siftUp`和`siftDown`两个方法来进行优先级的排序
+方法中会判断是否有自定义的比较器，如果存在自定义的比较器，使用自定义的，否则，使用默认的  
+
+``` java
+private void siftUpComparable(int k, E x) {
+    Comparable<? super E> key = (Comparable<? super E>) x;
+    while (k > 0) {
+        // 获取父节点位置
+        int parent = (k - 1) >>> 1;
+        // 获取父节点元素
+        Object e = queue[parent];
+        // 如果插入的元素大于父节点（构成小顶堆），结束循环
+        if (key.compareTo((E) e) >= 0)
+            break;
+        // 如果插入的元素小于父节点元素，将父节点元素调整下来
+        queue[k] = e;
+        // 记录父节点位置，继续向上判断调整
+        k = parent;
+    }
+    // 调整后将插入的元素放在对应的位置上
+    queue[k] = key;
+}
+```
