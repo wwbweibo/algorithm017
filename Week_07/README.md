@@ -14,6 +14,43 @@
 
 核心思想：空间换时间
 
+## 并查集
+
+```go [Golang-并查集]
+type UnionFind struct {
+    Count  int
+    parent []int
+}
+
+func (unionFind *UnionFind) find(p int) int {
+    for p != unionFind.parent[p] {
+        unionFind.parent[p] = unionFind.parent[unionFind.parent[p]]
+        p = unionFind.parent[p]
+    }
+    return p;
+}
+
+func (unionFind *UnionFind) Union(x, y int) {
+    int rootP = unionFind.find(p)
+    int rootQ = unionFind.find(q)
+    if rootP == rootQ {return}
+    parent[rootP] = rootQ
+    count--;
+}
+
+func NewUnionFind(n int) *UnionFind {
+    uf = UnionFind{
+        Count:  n,
+        parent: make([]int, n),
+    }
+    for i := 0; i < n; i++ {
+        uf.parent[i] = i
+    }
+
+    return &uf
+}
+```
+
 ## 双向BFS
 
 ## 启发式搜索
